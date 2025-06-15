@@ -49,3 +49,126 @@ arm-none-eabi-size  02_GPIO_Driver.elf
    1160	      0	   1568	   2728	    aa8	02_GPIO_Driver.elf
 Finished building: default.size.stdout
  
+10:11:23 **** Incremental Build of configuration Debug for project 02_GPIO_Driver ****
+make -j8 all 
+arm-none-eabi-size  02_GPIO_Driver.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1160	      0	   1568	   2728	    aa8	02_GPIO_Driver.elf
+Finished building: default.size.stdout
+ 
+10:11:24 **** Build of configuration Debug for project 03_Systick_timer ****
+make -j8 all 
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f446retx.d" -MT"Startup/startup_stm32f446retx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f446retx.o" "../Startup/startup_stm32f446retx.s"
+arm-none-eabi-gcc "../Src/GPIO_Driver.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/GPIO_Driver.d" -MT"Src/GPIO_Driver.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/GPIO_Driver.o"
+arm-none-eabi-gcc "../Src/Systick_timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/Systick_timer.d" -MT"Src/Systick_timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/Systick_timer.o"
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/syscalls.o"
+arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/sysmem.o"
+../Src/GPIO_Driver.c: In function 'GPIO_Write':
+../Src/GPIO_Driver.c:46:21: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   46 |                 ODR = &GPIOAa_ODR;
+      |                     ^
+../Src/GPIO_Driver.c:50:21: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   50 |                 ODR = &GPIOBb_ODR;
+      |                     ^
+../Src/GPIO_Driver.c:54:21: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   54 |                 ODR = &GPIOCc_ODR;
+      |                     ^
+../Src/GPIO_Driver.c:58:21: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   58 |                 ODR = &GPIODd_ODR;
+      |                     ^
+../Src/GPIO_Driver.c: In function 'GPIO_Read':
+../Src/GPIO_Driver.c:79:29: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   79 |                         IDR = &GPIOAa_IDR;
+      |                             ^
+../Src/GPIO_Driver.c:83:29: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   83 |                         IDR = &GPIOBb_IDR;
+      |                             ^
+../Src/Systick_timer.c: In function 'TIM2_IRQHandler':
+../Src/GPIO_Driver.c:87:29: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   87 |                         IDR = &GPIOCc_IDR;
+      |                             ^
+../Src/GPIO_Driver.c:91:29: warning: assignment discards 'volatile' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   91 |                         IDR = &GPIODd_IDR;
+      |                             ^
+../Src/Systick_timer.c:46:9: error: 'GPIOA_ODR' undeclared (first use in this function)
+   46 |         GPIOA_ODR ^= (1 << 5);
+      |         ^~~~~~~~~
+../Src/Systick_timer.c:46:9: note: each undeclared identifier is reported only once for each function it appears in
+../Src/Systick_timer.c: In function 'timer2_init':
+../Src/Systick_timer.c:51:5: error: 'RCC_APB1ENR' undeclared (first use in this function)
+   51 |     RCC_APB1ENR |= (1 << 0);   // Enable TIM2 clock
+      |     ^~~~~~~~~~~
+../Src/Systick_timer.c:59:5: error: 'NVIC_ISER0' undeclared (first use in this function)
+   59 |     NVIC_ISER0 |= (1 << 28);   // Enable TIM2 IRQ (IRQ #28)
+      |     ^~~~~~~~~~
+make: *** [Src/subdir.mk:31: Src/Systick_timer.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:11:40 **** Incremental Build of configuration Debug for project 02_GPIO_Driver ****
+make -j8 all 
+arm-none-eabi-size  02_GPIO_Driver.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1160	      0	   1568	   2728	    aa8	02_GPIO_Driver.elf
+Finished building: default.size.stdout
+ 
+10:11:40 **** Incremental Build of configuration Debug for project 03_Systick_timer ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/Systick_timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/Systick_timer.d" -MT"Src/Systick_timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/Systick_timer.o"
+../Src/Systick_timer.c: In function 'TIM2_IRQHandler':
+../Src/Systick_timer.c:46:9: error: 'GPIOA_ODR' undeclared (first use in this function); did you mean 'GPIOAa_ODR'?
+   46 |         GPIOA_ODR ^= (1 << 5);
+      |         ^~~~~~~~~
+      |         GPIOAa_ODR
+../Src/Systick_timer.c:46:9: note: each undeclared identifier is reported only once for each function it appears in
+../Src/Systick_timer.c: In function 'timer2_init':
+../Src/Systick_timer.c:51:5: error: 'RCC_APB1ENR' undeclared (first use in this function)
+   51 |     RCC_APB1ENR |= (1 << 0);   // Enable TIM2 clock
+      |     ^~~~~~~~~~~
+../Src/Systick_timer.c:59:5: error: 'NVIC_ISER0' undeclared (first use in this function)
+   59 |     NVIC_ISER0 |= (1 << 28);   // Enable TIM2 IRQ (IRQ #28)
+      |     ^~~~~~~~~~
+make: *** [Src/subdir.mk:31: Src/Systick_timer.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+10:11:55 **** Incremental Build of configuration Debug for project 02_GPIO_Driver ****
+make -j8 all 
+arm-none-eabi-size  02_GPIO_Driver.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1160	      0	   1568	   2728	    aa8	02_GPIO_Driver.elf
+Finished building: default.size.stdout
+ 
+10:11:56 **** Incremental Build of configuration Debug for project 03_Systick_timer ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/Systick_timer.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/Systick_timer.d" -MT"Src/Systick_timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/Systick_timer.o"
+arm-none-eabi-gcc -o "03_Systick_timer.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\ALL VIIT\STM32_F4\STMCubeIDE\03_Systick_timer\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="03_Systick_timer.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 03_Systick_timer.elf
+ 
+arm-none-eabi-size  03_Systick_timer.elf 
+arm-none-eabi-objdump -h -S 03_Systick_timer.elf  > "03_Systick_timer.list"
+   text	   data	    bss	    dec	    hex	filename
+   1360	      0	   1568	   2928	    b70	03_Systick_timer.elf
+Finished building: default.size.stdout
+ 
+Finished building: 03_Systick_timer.list
+ 
+10:12:09 **** Incremental Build of configuration Debug for project 02_GPIO_Driver ****
+make -j8 all 
+arm-none-eabi-size  02_GPIO_Driver.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1160	      0	   1568	   2728	    aa8	02_GPIO_Driver.elf
+Finished building: default.size.stdout
+ 
+10:12:09 **** Incremental Build of configuration Debug for project 03_Systick_timer ****
+make -j8 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc -o "03_Systick_timer.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\ALL VIIT\STM32_F4\STMCubeIDE\03_Systick_timer\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="03_Systick_timer.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 03_Systick_timer.elf
+ 
+arm-none-eabi-size  03_Systick_timer.elf 
+arm-none-eabi-objdump -h -S 03_Systick_timer.elf  > "03_Systick_timer.list"
+   text	   data	    bss	    dec	    hex	filename
+   1368	      0	   1568	   2936	    b78	03_Systick_timer.elf
+Finished building: default.size.stdout
+ 
+Finished building: 03_Systick_timer.list
+ 

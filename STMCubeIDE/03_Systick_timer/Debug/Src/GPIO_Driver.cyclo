@@ -1,0 +1,4 @@
+../Src/GPIO_Driver.c:11:6:init_GP	5
+../Src/GPIO_Driver.c:39:6:GPIO_Write	6
+../Src/GPIO_Driver.c:72:5:GPIO_Read	5
+../Src/GPIO_Driver.c:100:6:toggle_GP	2

@@ -1,0 +1,16 @@
+/*
+ * Systick_timer.h
+ *
+ *  Created on: Jun 15, 2025
+ *      Author: Tanishq
+ */
+
+#include <stdint.h>
+#include "GPIO_Driver.h"
+#include "Systick_timer.h"
+
+
+int main(void)
+{
+	init_GP(PA, 5, OUT, O_PP, O_FS);
+}
