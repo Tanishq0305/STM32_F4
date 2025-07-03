@@ -1,0 +1,25 @@
+/*
+ * lcd.h
+ *
+ *  Created on: Jul 3, 2025
+ *      Author: Tanishq
+ */
+
+#ifndef __LCD_H__
+#define __LCD_H__
+
+#include "stm32f4xx_hal.h"
+
+// Change this according to your I2C handler & LCD address
+#define LCD_I2C_ADDR (0x27 << 1)  // 0x27 or 0x3F, left-shifted for HAL
+
+extern I2C_HandleTypeDef hi2c1;   // your I2C handler
+
+void lcd_init(void);
+void lcd_send_cmd(char cmd);
+void lcd_send_data(char data);
+void lcd_send_string(char *str);
+void lcd_put_cur(int row, int col);
+void lcd_clear(void);
+
+#endif

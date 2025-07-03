@@ -1,0 +1,111 @@
+/*
+ * lcd.c
+ *
+ *  Created on: Jul 3, 2025
+ *      Author: Tanishq
+ */
+
+
+#include "lcd.h"
+#include "string.h"
+
+// PCF8574 pins: RS RW EN D4 D5 D6 D7 Backlight
+
+static void lcd_send_byte(char data, int rs);
+
+void lcd_send_cmd(char cmd)
+{
+    lcd_send_byte(cmd, 0);
+}
+
+void lcd_send_data(char data)
+{
+    lcd_send_byte(data, 1);
+}
+
+static void lcd_send_byte(char data, int rs)
+{
+    char up = data & 0xF0;         // upper nibble
+    char lo = (data << 4) & 0xF0;  // lower nibble
+
+    char data_u = up | 0x08;   // Backlight ON
+    char data_l = lo | 0x08;
+
+    if(rs) {
+        data_u |= 0x01;  // RS = 1 for data
+        data_l |= 0x01;
+    }
+
+    // send upper nibble
+    HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDR, (uint8_t *)&data_u, 1, 10);
+    lcd_strobe(data_u);
+
+    // send lower nibble
+    HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDR, (uint8_t *)&data_l, 1, 10);
+    lcd_strobe(data_l);
+}
+
+void lcd_strobe(char data)
+{
+    char data_t = data | 0x04;  // EN = 1
+    HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDR, (uint8_t *)&data_t, 1, 10);
+    HAL_Delay(1);
+    data_t = data & ~0x04;      // EN = 0
+    HAL_I2C_Master_Transmit(&hi2c1, LCD_I2C_ADDR, (uint8_t *)&data_t, 1, 10);
+    HAL_Delay(1);
+}
+
+void lcd_init(void)
+{
+    HAL_Delay(50); // wait for LCD to power up
+
+    lcd_send_cmd(0x30);
+    HAL_Delay(5);
+    lcd_send_cmd(0x30);
+    HAL_Delay(1);
+    lcd_send_cmd(0x30);
+    HAL_Delay(10);
+
+    lcd_send_cmd(0x20); // 4-bit mode
+    HAL_Delay(10);
+
+    // Function Set: 2 lines, 5x8 font
+    lcd_send_cmd(0x28);
+    HAL_Delay(1);
+
+    // Display ON, Cursor OFF, Blink OFF
+    lcd_send_cmd(0x0C);
+    HAL_Delay(1);
+
+    // Clear display
+    lcd_send_cmd(0x01);
+    HAL_Delay(2);
+
+    // Entry Mode: Increment, no shift
+    lcd_send_cmd(0x06);
+}
+
+void lcd_send_string(char *str)
+{
+    while(*str) {
+        lcd_send_data(*str++);
+    }
+}
+
+void lcd_put_cur(int row, int col)
+{
+    switch(row) {
+        case 0:
+            lcd_send_cmd(0x80 + col);
+            break;
+        case 1:
+            lcd_send_cmd(0xC0 + col);
+            break;
+    }
+}
+
+void lcd_clear(void)
+{
+    lcd_send_cmd(0x01);
+    HAL_Delay(2);
+}
